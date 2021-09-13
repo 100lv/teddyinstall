@@ -1,1 +1,51 @@
-
+#cloud-config
+autoinstall:
+  apt:
+    geoip: true
+    preserve_sources_list: false
+    primary:
+    - arches: [amd64, i386]
+      uri: http://bg.archive.ubuntu.com/ubuntu
+    - arches: [default]
+      uri: http://ports.ubuntu.com/ubuntu-ports
+  identity: {hostname: chpl001, password: $6$mqxr5G7ZJ1twpHn.$IpasD8o/omfS8oFI8SuXiG0zLsaPdXHscnE7oAvk4q2K/x/5Bf0oQe.dkwj4d6yKdnoJudYTRDnAR1IRGBVQF.,
+    realname: Chia Plotter, username: chpt}
+  keyboard: {layout: us, toggle: null, variant: ''}
+  locale: en_US.UTF-8
+  network:
+    ethernets:
+      enp0s31f6: {dhcp4: true}
+    version: 2
+  ssh:
+    allow-pw: true
+    authorized-keys: []
+    install-server: true
+  storage:
+    config:
+    - {ptable: gpt, path: /dev/nvme0n1, wipe: superblock-recursive, preserve: false, name: '', grub_device: false,
+      type: disk, id: disk-nvme0n1}
+    - {device: disk-nvme0n1, size: 536870912, wipe: superblock, flag: boot, number: 1,
+      preserve: false, grub_device: true, type: partition, id: partition-2}
+    - {fstype: fat32, volume: partition-2, preserve: false, type: format, id: format-1}
+    - {device: disk-nvme0n1, size: 524288000, wipe: superblock, flag: '', number: 2,
+      preserve: false, grub_device: false, type: partition, id: partition-3}
+    - {fstype: ext4, volume: partition-3, preserve: false, type: format, id: format-2}
+    - {device: disk-nvme0n1, size: 1073741824, wipe: superblock, flag: swap, number: 3,
+      preserve: false, grub_device: false, type: partition, id: partition-4}
+    - {fstype: swap, volume: partition-4, preserve: false, type: format, id: format-3}
+    - {device: format-3, path: '', type: mount, id: mount-3}
+    - {device: disk-nvme0n1, size: 42949672960, wipe: superblock, flag: '', number: 4,
+      preserve: false, grub_device: false, type: partition, id: partition-5}
+    - name: rootvg
+      devices: [partition-5]
+      preserve: false
+      type: lvm_volgroup
+      id: lvm_volgroup-1
+    - {name: lv0, volgroup: lvm_volgroup-1, size: 42945478656B, wipe: superblock,
+      preserve: false, type: lvm_partition, id: lvm_partition-0}
+    - {fstype: ext4, volume: lvm_partition-0, preserve: false, type: format, id: format-4}
+    - {device: format-4, path: /, type: mount, id: mount-4}
+    - {device: format-2, path: /boot, type: mount, id: mount-2}
+    - {device: format-1, path: /boot/efi, type: mount, id: mount-1}
+  updates: security
+  version: 1
