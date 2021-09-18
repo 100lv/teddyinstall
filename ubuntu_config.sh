@@ -49,6 +49,8 @@ rm linux-modules-5.12.19-051219-generic_5.12.19-051219.202107201136_amd64.deb
 
 # TODO - Change host name
 
+
+
 # TODO - ask for password change
 
 
