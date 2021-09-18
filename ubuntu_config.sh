@@ -7,15 +7,7 @@
 # ########### 
 
 read -p "Welcome to Chia Plotter and Harvester system configurator. Press ENTER to continue."
-
 read -p "Starting configuration. Each and evey command now requests pressing ENTER to continue"
-
-
-
-# TODO - Update of hostname
-
-# TODO - Change password
-
 
 # Next few lines upgrade systm to latest level
 
@@ -27,10 +19,8 @@ then
     apt upgrade -y
 fi
 
-
-
+######## Next few lines will upgrade the kernel to solve the issue with LAN Adapter
 read -p "Now we will upgrade the kernel to fix the isssues with Intel LAN adapter. Are you sure?" -n 1 -r
-
 
 # Download kernel files
 if [[ $REPLY =~ ^[Yy]$ ]]
@@ -51,9 +41,31 @@ then
     rm linux-modules-5.12.19-051219-generic_5.12.19-051219.202107201136_amd64.deb
 fi 
 
-# TODO - Change host name
+#  Change host name
 
+read -p "Do you want to change hostname?" -n 1 -r
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    #Assign existing hostname to $hostn
+    hostn=$(cat /etc/hostname)
 
+    #Display existing hostname
+    echo "Existing hostname is $hostn"
+
+    #Ask for new hostname $newhost
+    echo "Enter new hostname: "
+    read newhost
+    read -p "Hostname will be changed to $newhost. Please confirm [YN]"
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+        sudo sed -i "s/$hostn/$newhost/g" /etc/hosts
+        sudo sed -i "s/$hostn/$newhost/g" /etc/hostname
+
+        #display new hostname
+        echo "Your new hostname is $newhost"
+    fi 
+
+fi
 
 # TODO - ask for password change
 
@@ -61,7 +73,6 @@ fi
 
 # Disable sleep
 read -p "Disable sleep mode"
-
 systemctl mask sleep.target suspend.target hybrid-sleep.target hibernate.target
 
 
