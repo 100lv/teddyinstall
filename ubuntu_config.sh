@@ -180,6 +180,17 @@ reboot
 #################### Add disk subsystem
 
 # Configure iSCSI - TODO
+
+
 # Add LUN - TODO
+
+
+
+# List all devices
+# Ask to choose
+# Check if it's empty
+# Add FS and mountpoint
+
+
 # Check FS - TODO
 
