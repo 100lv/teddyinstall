@@ -1,6 +1,6 @@
 # Bash script
 # This script prepares CHIA Plotter system
-# Version 1.5 - Teo's Setup
+# Version 1.6 - Teo's Setup - now script is interactial
 # 13 September 2021
 # by Svetoslav Tolev
 
