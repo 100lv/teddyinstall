@@ -19,33 +19,37 @@ read -p "Starting configuration. Each and evey command now requests pressing ENT
 
 # Next few lines upgrade systm to latest level
 
-read -p "Starting system update"
+read -p "Starting system updateAre you sure? " -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    apt update
+    apt upgrade -y
+fi
 
-apt update
-apt upgrade -y
 
-read -p "Now we will upgrade the kernel to fix the isssues with Intel LAN adapter"
+
+read -p "Now we will upgrade the kernel to fix the isssues with Intel LAN adapter. Are you sure?" -n 1 -r
 
 
 # Download kernel files
-
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.12.19/amd64/linux-headers-5.12.19-051219-generic_5.12.19-051219.202107201136_amd64.deb
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.12.19/amd64/linux-headers-5.12.19-051219_5.12.19-051219.202107201136_all.deb
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.12.19/amd64/linux-image-unsigned-5.12.19-051219-generic_5.12.19-051219.202107201136_amd64.deb
-wget  https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.12.19/amd64/linux-modules-5.12.19-051219-generic_5.12.19-051219.202107201136_amd64.deb
-
-# Start install
-
-sudo dpkg -i *.deb
-
-
-# Remove kernel files
-
-rm linux-headers-5.12.19-051219-generic_5.12.19-051219.202107201136_amd64.deb
-rm linux-headers-5.12.19-051219_5.12.19-051219.202107201136_all.deb
-rm linux-image-unsigned-5.12.19-051219-generic_5.12.19-051219.202107201136_amd64.deb
-rm linux-modules-5.12.19-051219-generic_5.12.19-051219.202107201136_amd64.deb
-
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    echo "Downloading correct kernel level"
+    wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.12.19/amd64/linux-headers-5.12.19-051219-generic_5.12.19-051219.202107201136_amd64.deb
+    wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.12.19/amd64/linux-headers-5.12.19-051219_5.12.19-051219.202107201136_all.deb
+    wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.12.19/amd64/linux-image-unsigned-5.12.19-051219-generic_5.12.19-051219.202107201136_amd64.deb
+    wget  https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.12.19/amd64/linux-modules-5.12.19-051219-generic_5.12.19-051219.202107201136_amd64.deb
+    # Start install
+    read -p  "Install new kernel. At the end will ask for approval to restart services. Please confirm selected."
+    sudo dpkg -i *.deb
+    # Remove kernel files
+    echo "Removing downloaded kernal as it's already installed"
+    rm linux-headers-5.12.19-051219-generic_5.12.19-051219.202107201136_amd64.deb
+    rm linux-headers-5.12.19-051219_5.12.19-051219.202107201136_all.deb
+    rm linux-image-unsigned-5.12.19-051219-generic_5.12.19-051219.202107201136_amd64.deb
+    rm linux-modules-5.12.19-051219-generic_5.12.19-051219.202107201136_amd64.deb
+fi 
 
 # TODO - Change host name
 
