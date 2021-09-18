@@ -186,10 +186,10 @@ reboot
 
 
 
-# List all devices
-# Ask to choose
-# Check if it's empty
-# Add FS and mountpoint
+# List all devices - TODO
+# Ask to choose - TODO
+# Check if it's empty - TODO
+# Add FS and mountpoint - TODO
 
 
 # Check FS - TODO
