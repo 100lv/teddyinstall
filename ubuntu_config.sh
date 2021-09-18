@@ -46,10 +46,20 @@ rm linux-headers-5.12.19-051219_5.12.19-051219.202107201136_all.deb
 rm linux-image-unsigned-5.12.19-051219-generic_5.12.19-051219.202107201136_amd64.deb
 rm linux-modules-5.12.19-051219-generic_5.12.19-051219.202107201136_amd64.deb
 
+
+# TODO - Change host name
+
+# TODO - ask for password change
+
+
+
 # Disable sleep
 read -p "Disable sleep mode"
 
 systemctl mask sleep.target suspend.target hybrid-sleep.target hibernate.target
+
+
+
 
 
 # Create a new partition for CHIA Temp
