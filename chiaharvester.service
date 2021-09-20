@@ -1,0 +1,16 @@
+[Unit]
+Description=Chia Harvester
+Wants=network-online.target
+After=network.target network-online.target
+StartLimitIntervalSec=0
+[Service]
+Type=forking
+Restart=always
+RestartSec=1
+User=chpt
+Environment=PATH=/home/chpt/chia-blockchain/venv/bin:${PATH}
+ExecStart=/home/chpt/chia-blockchain/venv/bin/python /home/chpt/chia-blockchain/venv/bin/chia start  harvester
+ExecStop=/home/chpt/chia-blockchain/venv/bin/python /home/chpt/chia-blockchain/venv/bin/chia stop all
+[Install]
+WantedBy=multi-user.target
+
