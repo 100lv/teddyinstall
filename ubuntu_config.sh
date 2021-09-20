@@ -139,9 +139,44 @@ git submodule update --init
 
 ### Install CHIA harvester - TODO
 
-### Configure CHIA Harvester - TODO
 
-### Add CRON for chia plot for Mad Max Plotter - TODO
+### TODO - check how to execute commnds as it's into the harvester service
+
+# git clone https://github.com/Chia-Network/chia-blockchain.git -b latest --recurse-submodules
+# cd chia-blockchain
+# sh install.sh
+# . ./activate
+
+
+### Configure CHIA Harvester 
+read -p "Adding CHIA Harvester service"
+
+wget 
+
+
+
+
+###
+
+read "Please enter IP address of the full node?"
+
+scp chiaplot@$REPLY:.chia/mainnet/config/ssl/ca/* .
+
+chia init -c .
+
+
+### TODO - Edit confg.yaml - to add full node
+
+
+
+
+#### Add harverster service
+
+
+
+
+
+### Add CRON for chia plot for Mad Max Plotter
 
 wget https://github.com/100lv/ubuntuinstall/raw/main/chia_madmax_start.sh
 chmod +x chia_madmax_start.sh
@@ -213,4 +248,7 @@ reboot
 
 
 # Check FS - TODO
+
+
+# Add FS to Chia harvester
 
