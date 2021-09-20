@@ -67,14 +67,21 @@ then
 
 fi
 
-# TODO - ask for password change
+# ask for password change
+
+read -p "Do you want to chnge user chpt password?" -n 1 -ram
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    passwd chpt
+fi
+
+
 
 
 
 # Disable sleep
 read -p "Disable sleep mode"
 systemctl mask sleep.target suspend.target hybrid-sleep.target hibernate.target
-
 
 
 
@@ -163,7 +170,7 @@ chmod +x chia_madmax_start.sh
 ##### Remove snap
 # First snaps
 
-read -p "Remo snaps services"
+read -p "Remo snaps services - you don't need them"
 
  snap remove --purge lxd
  snap remove --purge core18
@@ -198,8 +205,6 @@ reboot
 
 
 # Add LUN - TODO
-
-
 
 # List all devices - TODO
 # Ask to choose - TODO
