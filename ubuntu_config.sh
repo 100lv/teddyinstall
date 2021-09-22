@@ -121,7 +121,9 @@ mount -a
 
 
 
-#### Install MAD Max CHIA Plotter
+
+### Install MadMax Plotter
+
 mkdir chia-plotter
 apt install -y libsodium-dev cmake g++ git build-essential
 # Checkout the source and install
@@ -135,23 +137,12 @@ git submodule update --init
 
 
 
-
-
-### Install CHIA harvester - TODO
-
-
 ### TODO - check how to execute commnds as it's into the harvester service
 
 # git clone https://github.com/Chia-Network/chia-blockchain.git -b latest --recurse-submodules
 # cd chia-blockchain
 # sh install.sh
 # . ./activate
-
-
-### Configure CHIA Harvester 
-read -p "Adding CHIA Harvester service"
-
-wget 
 
 
 
@@ -172,7 +163,12 @@ chia init -c .
 
 #### Add harverster service
 
+read -p "Adding CHIA Harvester service"
 
+wget https://raw.githubusercontent.com/100lv/teddyinstall/main/chiaharvester.service
+mv chiaharvester.service /etc/systemd/system
+sudo systemctl enable chiaharvester.service
+sudo systemctl start chiaharvester.service
 
 
 
@@ -187,9 +183,6 @@ chmod +x chia_madmax_start.sh
 # mv madmax.service /etc/systemd/system
 # sudo systemctl enable madmax.service
 
-
-
-### Add Service for CHIA Harvester
 
 
 
