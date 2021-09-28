@@ -219,17 +219,17 @@ apt-mark hold snapd
 
 
 
-
-# Finish
-
-read -p "System should be rebooted
-reboot
-
-
-
 #################### Add disk subsystem
 
 # Configure iSCSI - TODO
+sudo apt install open-iscsi
+
+### Change initiator to hostname
+$changeh='ubuntu/'$(hostname)
+sudo sed -i 's/'$changeh'/g'  /etc/iscsi/initiatorname.iscsi
+
+
+
 
 
 # Add LUN - TODO
@@ -245,3 +245,8 @@ reboot
 
 # Add FS to Chia harvester
 
+
+# Finish
+
+read -p "System should be rebooted
+reboot
