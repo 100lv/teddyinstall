@@ -229,6 +229,41 @@ changeh='ubuntu/'$(hostname)
 sudo sed -i 's/'$changeh'/g'  /etc/iscsi/initiatorname.iscsi
 
 
+sudo systemctl restart iscsid.service
+
+# Register iSCSI interface
+
+sudo iscsiadm -m iface -I enp0s31f6 --op=new
+
+# Aks for IP of the storage
+
+read "Please enter iSCSI interface of the storage"
+
+sudo iscsiadm -m discovery -I enp0s31f6 --op=new --op=del --type sendtargets --portal $REPLY
+
+read -p "Please create volume on the storage and map it to the host. This should be performed on ME4 system! When you are ready please press ENTER!"
+
+#### Discover the new LUN
+#### Add autologin for iSCSI
+#### Restart multipath
+
+
+### Create volume on storage. Map to host (RG4 pool)  / rg4_v0001
+
+sudo iscsiadm -m node --op=update -n node.conn[0].startup -v automatic
+
+sudo iscsiadm -m node --op=update -n node.startup -v automatic
+
+sudo systemctl enable open-iscsi
+
+sudo systemctl enable iscsid
+sudo systemctl restart iscsid.service
+sudo iscsiadm -m node --loginall=automatic
+
+sudo apt-get install multipath-tools
+multipath -r
+
+
 
 
 
