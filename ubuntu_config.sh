@@ -225,7 +225,7 @@ apt-mark hold snapd
 sudo apt install open-iscsi
 
 ### Change initiator to hostname
-changeh='ubuntu/'$(hostname)
+changeh='ubuntu/'$(newhost)
 sudo sed -i 's/'$changeh'/g'  /etc/iscsi/initiatorname.iscsi
 
 
