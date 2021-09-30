@@ -149,7 +149,7 @@ git submodule update --init
 
 ###
 
-read "Please enter IP address of the full node?"
+read -p "Please enter IP address of the full node?"
 
 scp chiaplot@$REPLY:.chia/mainnet/config/ssl/ca/* .
 
@@ -176,7 +176,7 @@ sudo systemctl start chiaharvester.service
 
 wget https://github.com/100lv/ubuntuinstall/raw/main/chia_madmax_start.sh
 chmod +x chia_madmax_start.sh
-{  crontab -l; echo "@reboot /home/chpt/chia_madmax_start.sh";  | crontab - }
+### TODO - Execute manuallt TODO {  crontab -l; echo "@reboot /home/chpt/chia_madmax_start.sh";  | crontab - }
 
 
 # wget https://github.com/100lv/ubuntuinstall/raw/main/madmax.service
@@ -283,5 +283,5 @@ multipath -r
 
 # Finish
 
-read -p "System should be rebooted
+read -p "System should be rebooted"
 reboot
